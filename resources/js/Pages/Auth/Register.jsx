@@ -20,14 +20,14 @@ export default function Register() {
             <Head title="Daftar Akun" />
 
             <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-                <div className="inline-flex w-12 h-12 rounded-2xl bg-blue-600 items-center justify-center text-white font-bold text-2xl shadow-md">
-                    T
-                </div>
+                <Link href="/" className="inline-flex w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 items-center justify-center text-white font-black text-2xl shadow-md">
+                    B
+                </Link>
                 <h2 className="mt-4 text-3xl font-extrabold text-slate-900 tracking-tight">
                     Daftar Akun Baru
                 </h2>
                 <p className="mt-2 text-sm text-slate-600">
-                    Mulai atur pekerjaan dan todolist Anda dengan mudah
+                    Bergabung sebagai penulis dan mulai menerbitkan artikel Anda
                 </p>
             </div>
 
@@ -43,7 +43,7 @@ export default function Register() {
                                 value={data.name}
                                 onChange={(e) => setData('name', e.target.value)}
                                 required
-                                className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 placeholder="Contoh: Budi Santoso"
                             />
                             {errors.name && <p className="mt-1 text-xs text-rose-600">{errors.name}</p>}
@@ -58,7 +58,7 @@ export default function Register() {
                                 value={data.username}
                                 onChange={(e) => setData('username', e.target.value)}
                                 required
-                                className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 placeholder="Contoh: budi123"
                             />
                             {errors.username && <p className="mt-1 text-xs text-rose-600">{errors.username}</p>}
@@ -73,7 +73,7 @@ export default function Register() {
                                 value={data.email}
                                 onChange={(e) => setData('email', e.target.value)}
                                 required
-                                className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 placeholder="budi@example.com"
                             />
                             {errors.email && <p className="mt-1 text-xs text-rose-600">{errors.email}</p>}
@@ -88,7 +88,7 @@ export default function Register() {
                                 value={data.password}
                                 onChange={(e) => setData('password', e.target.value)}
                                 required
-                                className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 placeholder="Minimal 8 karakter"
                             />
                             {errors.password && <p className="mt-1 text-xs text-rose-600">{errors.password}</p>}
@@ -103,7 +103,7 @@ export default function Register() {
                                 value={data.password_confirmation}
                                 onChange={(e) => setData('password_confirmation', e.target.value)}
                                 required
-                                className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                                className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 placeholder="Ulangi password"
                             />
                         </div>
@@ -112,7 +112,7 @@ export default function Register() {
                             <button
                                 type="submit"
                                 disabled={processing}
-                                className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-xl shadow-md text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition disabled:opacity-50"
+                                className="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-xl shadow-md text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition disabled:opacity-50"
                             >
                                 {processing ? 'Mendaftarkan...' : 'Daftar Sekarang'}
                             </button>
@@ -123,14 +123,19 @@ export default function Register() {
                         Sudah punya akun?{' '}
                         <Link
                             href="/login"
-                            className="font-semibold text-blue-600 hover:text-blue-500 hover:underline"
+                            className="font-semibold text-indigo-600 hover:text-indigo-500 hover:underline"
                         >
                             Masuk di sini
                         </Link>
+                    </div>
+
+                    <div className="mt-3 text-center text-sm">
+                        <Link href="/" className="text-slate-500 hover:text-slate-800 hover:underline">
+                            &larr; Kembali ke beranda
+                </Link>
                     </div>
                 </div>
             </div>
         </div>
     );
 }
-

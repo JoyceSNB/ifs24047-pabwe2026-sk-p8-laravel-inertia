@@ -22,7 +22,7 @@ export default function UserList({ users, filters }) {
                     <div>
                         <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Manajemen Pengguna</h1>
                         <p className="text-sm text-slate-500 mt-0.5">
-                            Daftar seluruh akun terdaftar dan ringkasan todolist masing-masing user
+                            Daftar seluruh akun terdaftar dan jumlah artikel masing-masing penulis
                         </p>
                     </div>
                 </div>
@@ -52,7 +52,7 @@ export default function UserList({ users, filters }) {
                                     <th className="px-6 py-3.5">Pengguna</th>
                                     <th className="px-6 py-3.5">Email</th>
                                     <th className="px-6 py-3.5">Role</th>
-                                    <th className="px-6 py-3.5 text-center">Jumlah Todo</th>
+                                    <th className="px-6 py-3.5 text-center">Jumlah Artikel</th>
                                     <th className="px-6 py-3.5">Terdaftar</th>
                                     <th className="px-6 py-3.5 text-right">Aksi</th>
                                 </tr>
@@ -80,17 +80,17 @@ export default function UserList({ users, filters }) {
                                             </span>
                                         </td>
                                         <td className="px-6 py-4 text-center font-bold text-slate-700">
-                                            {user.todos_count ?? 0}
+                                            {user.posts_count ?? 0}
                                         </td>
                                         <td className="px-6 py-4 text-slate-400">
                                             {user.created_at ? new Date(user.created_at).toLocaleDateString('id-ID') : '-'}
                                         </td>
                                         <td className="px-6 py-4 text-right">
                                             <Link
-                                                href={`/admin/users/${user.id}/todos`}
+                                                href={`/admin/users/${user.id}/posts`}
                                                 className="inline-flex items-center space-x-1 px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 font-semibold rounded-lg transition"
                                             >
-                                                <span>Lihat Todo</span>
+                                                <span>Lihat Artikel</span>
                                                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                                                 </svg>
@@ -126,4 +126,3 @@ export default function UserList({ users, filters }) {
         </AppLayout>
     );
 }
-
