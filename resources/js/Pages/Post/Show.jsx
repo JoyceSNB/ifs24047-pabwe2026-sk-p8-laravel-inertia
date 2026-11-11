@@ -104,7 +104,7 @@ export default function PostShow({ post, categories = [] }) {
                         </button>
                         <button
                             onClick={() => setConfirmingDelete(true)}
-                            className="px-3.5 py-2 bg-rose-50 hover:bg-rose-100 text-rose-600 border border-rose-200 text-xs font-semibold rounded-xl transition"
+                            className="px-3.5 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-semibold rounded-xl transition"
                         >
                             Hapus
                         </button>
@@ -212,7 +212,7 @@ export default function PostShow({ post, categories = [] }) {
                                     required
                                     className="mt-1 w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-indigo-500"
                                 />
-                                {editForm.errors.title && <p className="mt-1 text-xs text-rose-600">{editForm.errors.title}</p>}
+                                {editForm.errors.title && <p className="mt-1 text-xs text-rose-700">{editForm.errors.title}</p>}
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -250,7 +250,7 @@ export default function PostShow({ post, categories = [] }) {
                                     onChange={(e) => editForm.setData('excerpt', e.target.value)}
                                     className="mt-1 w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-indigo-500"
                                 />
-                                {editForm.errors.excerpt && <p className="mt-1 text-xs text-rose-600">{editForm.errors.excerpt}</p>}
+                                {editForm.errors.excerpt && <p className="mt-1 text-xs text-rose-700">{editForm.errors.excerpt}</p>}
                             </div>
 
                             <div>
@@ -265,7 +265,7 @@ export default function PostShow({ post, categories = [] }) {
                                     height="460px"
                                 />
 </Suspense>
-                                {editForm.errors.content && <p className="mt-1 text-xs text-rose-600">{editForm.errors.content}</p>}
+                                {editForm.errors.content && <p className="mt-1 text-xs text-rose-700">{editForm.errors.content}</p>}
                             </div>
                         </div>
 

@@ -28,3 +28,10 @@ button:disabled,
 [aria-disabled='true'] {
     cursor: not-allowed;
 }
+
+/* Kontras kode inline pada konten markdown (WCAG AA) */
+.toastui-editor-contents.toastui-editor-contents code,
+.toastui-editor-contents.toastui-editor-contents p code {
+    color: #8a2c43;
+    background-color: #f9f2f4;
+}

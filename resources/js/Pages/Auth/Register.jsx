@@ -46,7 +46,7 @@ export default function Register() {
                                 className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 placeholder="Contoh: Budi Santoso"
                             />
-                            {errors.name && <p className="mt-1 text-xs text-rose-600">{errors.name}</p>}
+                            {errors.name && <p className="mt-1 text-xs text-rose-700">{errors.name}</p>}
                         </div>
 
                         <div>
@@ -61,7 +61,7 @@ export default function Register() {
                                 className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 placeholder="Contoh: budi123"
                             />
-                            {errors.username && <p className="mt-1 text-xs text-rose-600">{errors.username}</p>}
+                            {errors.username && <p className="mt-1 text-xs text-rose-700">{errors.username}</p>}
                         </div>
 
                         <div>
@@ -76,7 +76,7 @@ export default function Register() {
                                 className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 placeholder="budi@example.com"
                             />
-                            {errors.email && <p className="mt-1 text-xs text-rose-600">{errors.email}</p>}
+                            {errors.email && <p className="mt-1 text-xs text-rose-700">{errors.email}</p>}
                         </div>
 
                         <div>
@@ -91,7 +91,7 @@ export default function Register() {
                                 className="mt-1 block w-full px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 shadow-xs focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
                                 placeholder="Minimal 8 karakter"
                             />
-                            {errors.password && <p className="mt-1 text-xs text-rose-600">{errors.password}</p>}
+                            {errors.password && <p className="mt-1 text-xs text-rose-700">{errors.password}</p>}
                         </div>
 
                         <div>

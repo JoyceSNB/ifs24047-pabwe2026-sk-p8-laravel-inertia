@@ -81,7 +81,7 @@ export default function Login() {
                                 />
                             </div>
                             {errors.password && (
-                                <p className="mt-1 text-xs text-rose-600">{errors.password}</p>
+                                <p className="mt-1 text-xs text-rose-700">{errors.password}</p>
                             )}
                         </div>
 

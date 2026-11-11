@@ -234,7 +234,7 @@ export default function PostIndex({ posts, filters = {}, categories = [], stats 
                         href="/dashboard/posts/export"
                         className="inline-flex items-center space-x-1.5 px-3.5 py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-semibold rounded-xl transition"
                     >
-                        <svg className="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className="w-4 h-4 text-emerald-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
                         <span>Export Excel</span>
@@ -269,7 +269,7 @@ export default function PostIndex({ posts, filters = {}, categories = [], stats 
                     </div>
 
                     <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-xs flex items-center space-x-3.5">
-                        <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
+                        <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 border border-emerald-100">
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -277,14 +277,14 @@ export default function PostIndex({ posts, filters = {}, categories = [], stats 
                         <div>
                             <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block">Total Selesai</span>
                             <div className="flex items-baseline space-x-1.5 mt-0.5">
-                                <span id="stat-published" className="text-2xl font-black text-emerald-600">{stats?.published ?? 0}</span>
-                                <span className="text-xs text-emerald-600 font-medium">dipublikasikan</span>
+                                <span id="stat-published" className="text-2xl font-black text-emerald-700">{stats?.published ?? 0}</span>
+                                <span className="text-xs text-emerald-700 font-medium">dipublikasikan</span>
                             </div>
                         </div>
                     </div>
 
                     <div className="bg-white p-4 rounded-2xl border border-slate-200/90 shadow-xs flex items-center space-x-3.5">
-                        <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-100">
+                        <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center shrink-0 border border-amber-100">
                             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
@@ -292,8 +292,8 @@ export default function PostIndex({ posts, filters = {}, categories = [], stats 
                         <div>
                             <span className="text-xs font-bold text-slate-600 uppercase tracking-wider block">Belum Selesai</span>
                             <div className="flex items-baseline space-x-1.5 mt-0.5">
-                                <span id="stat-draft" className="text-2xl font-black text-amber-600">{stats?.draft ?? 0}</span>
-                                <span className="text-xs text-amber-600 font-medium">masih draf</span>
+                                <span id="stat-draft" className="text-2xl font-black text-amber-700">{stats?.draft ?? 0}</span>
+                                <span className="text-xs text-amber-700 font-medium">masih draf</span>
                             </div>
                         </div>
                     </div>
@@ -464,7 +464,7 @@ export default function PostIndex({ posts, filters = {}, categories = [], stats 
                                                         setActiveMenuId(null);
                                                         setDeletingPost(post);
                                                     }}
-                                                    className="w-full px-3 py-2 text-xs font-semibold text-rose-600 hover:bg-rose-50 flex items-center space-x-2 transition text-left"
+                                                    className="w-full px-3 py-2 text-xs font-semibold text-rose-700 hover:bg-rose-50 flex items-center space-x-2 transition text-left"
                                                 >
                                                     <svg className="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -516,7 +516,7 @@ export default function PostIndex({ posts, filters = {}, categories = [], stats 
                                     className="mt-1 w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-indigo-500"
                                     placeholder="Contoh: Memulai Laravel 13 dengan Inertia"
                                 />
-                                {form.errors.title && <p className="mt-1 text-xs text-rose-600">{form.errors.title}</p>}
+                                {form.errors.title && <p className="mt-1 text-xs text-rose-700">{form.errors.title}</p>}
                             </div>
 
                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -531,7 +531,7 @@ export default function PostIndex({ posts, filters = {}, categories = [], stats 
                                             <option key={cat.value} value={cat.value}>{cat.label}</option>
                                         ))}
                                     </select>
-                                    {form.errors.category && <p className="mt-1 text-xs text-rose-600">{form.errors.category}</p>}
+                                    {form.errors.category && <p className="mt-1 text-xs text-rose-700">{form.errors.category}</p>}
                                 </div>
 
                                 <div>
@@ -557,7 +557,7 @@ export default function PostIndex({ posts, filters = {}, categories = [], stats 
                                     className="mt-1 w-full px-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-indigo-500"
                                     placeholder="1-2 kalimat pemikat pembaca..."
                                 />
-                                {form.errors.excerpt && <p className="mt-1 text-xs text-rose-600">{form.errors.excerpt}</p>}
+                                {form.errors.excerpt && <p className="mt-1 text-xs text-rose-700">{form.errors.excerpt}</p>}
                             </div>
 
                             <div>
@@ -573,7 +573,7 @@ export default function PostIndex({ posts, filters = {}, categories = [], stats 
                                     placeholder="Tulis artikel Anda dalam format Markdown..."
                                 />
 </Suspense>
-                                {form.errors.content && <p className="mt-1 text-xs text-rose-600">{form.errors.content}</p>}
+                                {form.errors.content && <p className="mt-1 text-xs text-rose-700">{form.errors.content}</p>}
                             </div>
                         </div>
 
@@ -656,7 +656,7 @@ export default function PostIndex({ posts, filters = {}, categories = [], stats 
                                         className="w-full text-xs text-slate-600 file:mr-3 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
                                     />
                                     {importForm.errors.importFile && (
-                                        <p className="mt-1 text-xs text-rose-600">{importForm.errors.importFile}</p>
+                                        <p className="mt-1 text-xs text-rose-700">{importForm.errors.importFile}</p>
                                     )}
                                 </div>
                                 <p className="text-[11px] text-slate-600">

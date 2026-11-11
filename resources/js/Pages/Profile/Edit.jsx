@@ -161,7 +161,7 @@ export default function ProfileEdit({ user }) {
                                         <button
                                             type="button"
                                             onClick={() => setConfirmingPhotoDelete(true)}
-                                            className="w-full py-2 px-4 bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-semibold rounded-xl border border-rose-200 transition"
+                                            className="w-full py-2 px-4 bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold rounded-xl border border-rose-200 transition"
                                         >
                                             Hapus Foto Profil
                                         </button>
@@ -192,7 +192,7 @@ export default function ProfileEdit({ user }) {
                                         required
                                         className="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-500"
                                     />
-                                    {infoForm.errors.name && <p className="mt-1 text-xs text-rose-600">{infoForm.errors.name}</p>}
+                                    {infoForm.errors.name && <p className="mt-1 text-xs text-rose-700">{infoForm.errors.name}</p>}
                                 </div>
 
                                 <div>
@@ -204,7 +204,7 @@ export default function ProfileEdit({ user }) {
                                         required
                                         className="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-500"
                                     />
-                                    {infoForm.errors.username && <p className="mt-1 text-xs text-rose-600">{infoForm.errors.username}</p>}
+                                    {infoForm.errors.username && <p className="mt-1 text-xs text-rose-700">{infoForm.errors.username}</p>}
                                 </div>
 
                                 <div>
@@ -216,7 +216,7 @@ export default function ProfileEdit({ user }) {
                                         required
                                         className="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-500"
                                     />
-                                    {infoForm.errors.email && <p className="mt-1 text-xs text-rose-600">{infoForm.errors.email}</p>}
+                                    {infoForm.errors.email && <p className="mt-1 text-xs text-rose-700">{infoForm.errors.email}</p>}
                                 </div>
 
                                 <div className="pt-2 flex justify-end">
@@ -257,7 +257,7 @@ export default function ProfileEdit({ user }) {
                                         className="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-500"
                                     />
                                     {passwordForm.errors.current_password && (
-                                        <p className="mt-1 text-xs text-rose-600">{passwordForm.errors.current_password}</p>
+                                        <p className="mt-1 text-xs text-rose-700">{passwordForm.errors.current_password}</p>
                                     )}
                                 </div>
 
@@ -271,7 +271,7 @@ export default function ProfileEdit({ user }) {
                                         className="mt-1 w-full px-3 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-blue-500"
                                     />
                                     {passwordForm.errors.password && (
-                                        <p className="mt-1 text-xs text-rose-600">{passwordForm.errors.password}</p>
+                                        <p className="mt-1 text-xs text-rose-700">{passwordForm.errors.password}</p>
                                     )}
                                 </div>
 

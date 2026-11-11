@@ -54,7 +54,7 @@ export default function PublicLayout({ children }) {
                                 </Link>
                                 <button
                                     onClick={handleLogout}
-                                    className="px-3 py-1.5 text-sm font-semibold text-rose-600 hover:bg-rose-50 rounded-xl transition"
+                                    className="px-3 py-1.5 text-sm font-semibold text-rose-700 hover:bg-rose-50 rounded-xl transition"
                                 >
                                     Keluar
                                 </button>
@@ -107,7 +107,7 @@ export default function PublicLayout({ children }) {
                         {user ? (
                             <>
                                 <Link href={dashboardHref} className="block px-3 py-2 text-sm font-semibold text-indigo-700 rounded-lg hover:bg-indigo-50">{dashboardLabel}</Link>
-                                <button onClick={handleLogout} className="block w-full text-left px-3 py-2 text-sm font-semibold text-rose-600 rounded-lg hover:bg-rose-50">Keluar</button>
+                                <button onClick={handleLogout} className="block w-full text-left px-3 py-2 text-sm font-semibold text-rose-700 rounded-lg hover:bg-rose-50">Keluar</button>
                             </>
                         ) : (
                             <div className="flex gap-2 pt-2">
