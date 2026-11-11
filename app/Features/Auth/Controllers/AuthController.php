@@ -34,7 +34,8 @@ class AuthController
                 return redirect()->intended(route('admin.users'));
             }
 
-            return redirect()->intended(route('todos.index'));
+            // UBAH 1: sebelumnya route('todos.index')
+            return redirect()->intended(route('dashboard.posts.index'));
         }
 
         throw ValidationException::withMessages([
@@ -67,7 +68,8 @@ class AuthController
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('todos.index');
+        // UBAH 2: sebelumnya route('todos.index')
+        return redirect()->route('dashboard.posts.index');
     }
 
     public function destroy(Request $request): RedirectResponse
@@ -76,7 +78,7 @@ class AuthController
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('login');
+        // UBAH 3: sebelumnya route('login'); sekarang kembali ke beranda publik
+        return redirect()->route('home');
     }
 }
-

@@ -2,19 +2,17 @@
 
 use App\Features\Admin\Controllers\AdminUserController;
 use App\Features\Auth\Controllers\AuthController;
+use App\Features\Post\Controllers\AdminPostController;
+use App\Features\Post\Controllers\PostController;
+use App\Features\Post\Controllers\PublicPostController;
 use App\Features\Profile\Controllers\ProfileController;
-use App\Features\Todo\Controllers\PublicTemplateController;
-use App\Features\Todo\Controllers\TodoController;
-use App\Features\Todo\Controllers\TodoGroupController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['throttle:1000-per-second'])->group(function () {
-    // Public Template Routes (Dapat diakses oleh umum tanpa perlu login)
-    Route::get('/', [PublicTemplateController::class, 'index'])->name('home');
-    Route::get('/templates', [PublicTemplateController::class, 'index'])->name('templates.index');
-    Route::get('/templates/{id}', [PublicTemplateController::class, 'show'])->name('templates.show');
-    Route::post('/templates/{id}/clone', [PublicTemplateController::class, 'clone'])->name('templates.clone');
+    // Tingkat 1 - Publik (tanpa login)
+    Route::get('/', [PublicPostController::class, 'index'])->name('home');
+    Route::get('/articles', [PublicPostController::class, 'index'])->name('articles.index');
+    Route::get('/articles/{slug}', [PublicPostController::class, 'show'])->name('articles.show');
 
     // Guest Authentication Routes
     Route::middleware('guest')->group(function () {
@@ -28,43 +26,33 @@ Route::middleware(['throttle:1000-per-second'])->group(function () {
     Route::middleware('auth')->group(function () {
         Route::post('/logout', [AuthController::class, 'destroy'])->name('logout');
 
-        // Todo Group Management
-        Route::post('/todo-groups', [TodoGroupController::class, 'store'])->name('todo-groups.store');
-        Route::put('/todo-groups/{todoGroup}', [TodoGroupController::class, 'update'])->name('todo-groups.update');
-        Route::delete('/todo-groups/{todoGroup}', [TodoGroupController::class, 'destroy'])->name('todo-groups.destroy');
-        Route::patch('/todo-groups/{todoGroup}/toggle-public', [TodoGroupController::class, 'togglePublic'])->name('todo-groups.toggle-public');
+        // Tingkat 2 - Member/Penulis: Excel & AI (sebelum rute wildcard {post})
+        Route::get('/dashboard/posts/export', [PostController::class, 'exportExcel'])->name('dashboard.posts.export');
+        Route::post('/dashboard/posts/import', [PostController::class, 'importExcel'])->name('dashboard.posts.import');
+        Route::post('/dashboard/posts/ai-generate', [PostController::class, 'generateAi'])->name('dashboard.posts.ai.generate');
+        Route::post('/dashboard/posts/ai-save', [PostController::class, 'saveAi'])->name('dashboard.posts.ai.save');
 
-        // Todo Excel & AI (Placed before wildcard {todo} route)
-        Route::get('/todos/export', [TodoController::class, 'exportExcel'])->name('todos.export');
-        Route::post('/todos/import', [TodoController::class, 'importExcel'])->name('todos.import');
-        Route::post('/todos/ai-generate', [TodoController::class, 'generateAi'])->name('todos.ai.generate');
-        Route::post('/todos/ai-save', [TodoController::class, 'saveAi'])->name('todos.ai.save');
-        Route::post('/todos/batch', [TodoController::class, 'saveAi'])->name('todos.batch');
+        Route::get('/dashboard/posts', [PostController::class, 'index'])->name('dashboard.posts.index');
+        Route::post('/dashboard/posts', [PostController::class, 'store'])->name('dashboard.posts.store');
 
-        // Member Todo Resource Routes
-        Route::get('/todos', [TodoController::class, 'index'])
-            ->middleware('owns.todo')
-            ->name('todos.index');
-        Route::post('/todos', [TodoController::class, 'store'])->name('todos.store');
-
-        Route::get('/todos/{todo}', [TodoController::class, 'show'])
-            ->middleware('owns.todo')
-            ->name('todos.show');
-        Route::put('/todos/{todo}', [TodoController::class, 'update'])
-            ->middleware('owns.todo')
-            ->name('todos.update');
-        Route::delete('/todos/{todo}', [TodoController::class, 'destroy'])
-            ->middleware('owns.todo')
-            ->name('todos.destroy');
-        Route::patch('/todos/{todo}/toggle', [TodoController::class, 'toggle'])
-            ->middleware('owns.todo')
-            ->name('todos.toggle');
-        Route::post('/todos/{todo}/cover', [TodoController::class, 'updateCover'])
-            ->middleware('owns.todo')
-            ->name('todos.cover.update');
-        Route::delete('/todos/{todo}/cover', [TodoController::class, 'deleteCover'])
-            ->middleware('owns.todo')
-            ->name('todos.cover.delete');
+        Route::get('/dashboard/posts/{post}', [PostController::class, 'show'])
+            ->middleware('owns.post')
+            ->name('dashboard.posts.show');
+        Route::put('/dashboard/posts/{post}', [PostController::class, 'update'])
+            ->middleware('owns.post')
+            ->name('dashboard.posts.update');
+        Route::delete('/dashboard/posts/{post}', [PostController::class, 'destroy'])
+            ->middleware('owns.post')
+            ->name('dashboard.posts.destroy');
+        Route::patch('/dashboard/posts/{post}/publish', [PostController::class, 'togglePublish'])
+            ->middleware('owns.post')
+            ->name('dashboard.posts.publish');
+        Route::post('/dashboard/posts/{post}/cover', [PostController::class, 'updateCover'])
+            ->middleware('owns.post')
+            ->name('dashboard.posts.cover.update');
+        Route::delete('/dashboard/posts/{post}/cover', [PostController::class, 'deleteCover'])
+            ->middleware('owns.post')
+            ->name('dashboard.posts.cover.delete');
 
         // User Profile Routes
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile');
@@ -73,11 +61,13 @@ Route::middleware(['throttle:1000-per-second'])->group(function () {
         Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('profile.photo.update');
         Route::delete('/profile/photo', [ProfileController::class, 'deletePhoto'])->name('profile.photo.delete');
 
-        // Admin Routes protected by Role middleware
+        // Tingkat 3 - Admin (read-only + ekspor)
         Route::prefix('admin')->name('admin.')->middleware('role:admin')->group(function () {
             Route::get('/users', [AdminUserController::class, 'index'])->name('users');
-            Route::get('/users/{user}/todos', [AdminUserController::class, 'todos'])->name('users.todos');
-            Route::get('/users/{user}/todos/export', [AdminUserController::class, 'exportUserTodos'])->name('users.todos.export');
+            Route::get('/users/{user}/posts', [AdminUserController::class, 'posts'])->name('users.posts');
+            Route::get('/users/{user}/posts/export', [AdminUserController::class, 'exportUserPosts'])->name('users.posts.export');
+            Route::get('/posts', [AdminPostController::class, 'index'])->name('posts');
+            Route::get('/posts/export', [AdminPostController::class, 'export'])->name('posts.export');
         });
     });
 });

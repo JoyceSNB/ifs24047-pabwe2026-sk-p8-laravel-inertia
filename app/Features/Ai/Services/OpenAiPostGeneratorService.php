@@ -3,12 +3,12 @@
 namespace App\Features\Ai\Services;
 
 use App\Features\Ai\Contracts\AiClientInterface;
-use App\Features\Ai\DTO\GeneratedTodoItem;
-use Carbon\Carbon;
+use App\Features\Ai\DTO\GeneratedPostItem;
+use App\Features\Post\Enums\PostCategory;
 use Illuminate\Support\Facades\Http;
 use RuntimeException;
 
-class OpenAiTodoGeneratorService implements AiClientInterface
+class OpenAiPostGeneratorService implements AiClientInterface
 {
     protected string $endpoint;
     protected string $apiKey;
@@ -41,13 +41,11 @@ class OpenAiTodoGeneratorService implements AiClientInterface
     }
 
     /**
-     * Generate multiple structured todo items based on a user prompt.
-     *
-     * @return array<int, GeneratedTodoItem>
+     * @return array<int, GeneratedPostItem>
      *
      * @throws RuntimeException
      */
-    public function generateTodos(string $prompt, int $count = 3): array
+    public function generatePosts(string $prompt, int $count = 3): array
     {
         $prompt = trim($prompt);
         if ($prompt === '') {
@@ -55,19 +53,19 @@ class OpenAiTodoGeneratorService implements AiClientInterface
         }
 
         $count = max(1, $count);
-        $today = Carbon::today()->format('Y-m-d');
+        $categories = implode(', ', PostCategory::values());
 
         $systemPrompt = <<<SYS
-You are an expert productivity assistant. Your task is to generate exactly {$count} realistic, actionable, and structured todo items based on the user's request.
-Today's date is {$today}.
+You are an expert blog writer. Generate exactly {$count} distinct blog article drafts in Indonesian based on the user's request.
 
 You MUST respond strictly with a valid JSON object matching this schema:
 {
-  "todos": [
+  "posts": [
     {
-      "title": "Clear concise task title (max 100 chars)",
-      "description": "Brief helpful actionable details about how to complete it",
-      "due_date": "YYYY-MM-DD or null"
+      "title": "Catchy article title (max 120 chars)",
+      "category": "One of: {$categories}",
+      "excerpt": "Teaser of 1-2 sentences that makes readers curious",
+      "content": "Article body in Markdown (use 2-3 headings, short paragraphs, 150-250 words)"
     }
   ]
 }
@@ -78,7 +76,7 @@ SYS;
         $response = Http::withHeaders([
             'Authorization' => "Bearer {$this->apiKey}",
             'Content-Type' => 'application/json',
-        ])->timeout(30)->post("{$this->endpoint}/chat/completions", [
+        ])->timeout(150)->post("{$this->endpoint}/chat/completions", [
             'model' => $this->model,
             'messages' => [
                 ['role' => 'system', 'content' => $systemPrompt],
@@ -93,19 +91,16 @@ SYS;
         }
 
         $rawContent = (string) $response->json('choices.0.message.content');
+
         return $this->parseContent($rawContent);
     }
 
-    /**
-     * Parse raw string content into an array of GeneratedTodoItem.
-     *
-     * @return array<int, GeneratedTodoItem>
-     */
+    /** @return array<int, GeneratedPostItem> */
     public function parseContent(string $rawContent): array
     {
         $cleanContent = trim($rawContent);
 
-        // Remove Markdown code fences if present
+        // Buang pagar kode Markdown jika ada
         if (str_starts_with($cleanContent, '```')) {
             $cleanContent = preg_replace('/^```(?:json)?\s*/i', '', $cleanContent);
             $cleanContent = preg_replace('/\s*```$/', '', $cleanContent);
@@ -118,13 +113,13 @@ SYS;
             throw new RuntimeException('AI mengembalikan format respon yang tidak valid.');
         }
 
-        // Support both {"todos": [...]} and [...]
-        $items = isset($decoded['todos']) && is_array($decoded['todos'])
-            ? $decoded['todos']
+        // Dukung {"posts": [...]} maupun [...]
+        $items = isset($decoded['posts']) && is_array($decoded['posts'])
+            ? $decoded['posts']
             : (array_is_list($decoded) ? $decoded : []);
 
         if (empty($items)) {
-            throw new RuntimeException('Tidak ada todo yang berhasil di-generate dari AI.');
+            throw new RuntimeException('Tidak ada artikel yang berhasil di-generate dari AI.');
         }
 
         $results = [];
@@ -133,33 +128,22 @@ SYS;
                 continue;
             }
 
-            $title = trim((string) $item['title']);
-            $description = isset($item['description']) && trim((string) $item['description']) !== ''
-                ? trim((string) $item['description'])
+            $excerpt = isset($item['excerpt']) && trim((string) $item['excerpt']) !== ''
+                ? trim((string) $item['excerpt'])
                 : null;
 
-            $dueDate = null;
-            if (!empty($item['due_date'])) {
-                try {
-                    $dueDate = Carbon::parse((string) $item['due_date'])->format('Y-m-d');
-                } catch (\Throwable) {
-                    $dueDate = null;
-                }
-            }
-
-            $results[] = new GeneratedTodoItem(
-                title: $title,
-                description: $description,
-                dueDate: $dueDate,
-                status: 'pending',
+            $results[] = new GeneratedPostItem(
+                title: mb_substr(trim((string) $item['title']), 0, 255),
+                category: PostCategory::fromInput((string) ($item['category'] ?? ''))->value,
+                excerpt: $excerpt,
+                content: trim((string) ($item['content'] ?? '')),
             );
         }
 
         if (empty($results)) {
-            throw new RuntimeException('Format item todo yang dikembalikan AI tidak sesuai spesifikasi.');
+            throw new RuntimeException('Format item artikel yang dikembalikan AI tidak sesuai spesifikasi.');
         }
 
         return $results;
     }
 }
-

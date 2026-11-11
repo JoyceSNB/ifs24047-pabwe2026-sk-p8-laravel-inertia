@@ -3,8 +3,7 @@
 namespace App\Features\Admin\Controllers;
 
 use App\Features\Admin\Services\AdminUserService;
-use App\Features\Todo\Enums\TodoStatus;
-use App\Features\Todo\Services\TodoExcelService;
+use App\Features\Post\Services\PostExcelService;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -26,25 +25,19 @@ class AdminUserController
         ]);
     }
 
-    public function todos(Request $request, User $user, AdminUserService $adminService): Response
+    public function posts(Request $request, User $user, AdminUserService $adminService): Response
     {
         $search = $request->query('search');
         $status = $request->query('status');
 
-        $todos = $adminService->getUserTodos(
+        $posts = $adminService->getUserPosts(
             $user->id,
             $status ?: null,
             $search ?: null,
             10
         );
 
-        $statuses = array_map(fn (TodoStatus $case) => [
-            'value' => $case->value,
-            'label' => $case->label(),
-            'badgeClass' => $case->badgeClass(),
-        ], TodoStatus::cases());
-
-        return Inertia::render('Admin/UserTodoList', [
+        return Inertia::render('Admin/UserPostList', [
             'targetUser' => [
                 'id' => $user->id,
                 'name' => $user->name,
@@ -52,21 +45,19 @@ class AdminUserController
                 'email' => $user->email,
                 'role' => $user->role,
             ],
-            'todos' => $todos,
+            'posts' => $posts,
             'filters' => [
                 'search' => $search ?? '',
                 'status' => $status ?? '',
             ],
-            'statuses' => $statuses,
         ]);
     }
 
-    public function exportUserTodos(User $user, TodoExcelService $excelService): StreamedResponse
+    public function exportUserPosts(User $user, PostExcelService $excelService): StreamedResponse
     {
-        $todos = $user->todos()->latest('id')->get();
+        $posts = $user->posts()->with('user:id,name,username')->latest('id')->get();
         $safeName = preg_replace('/[^A-Za-z0-9_-]/', '_', $user->name);
 
-        return $excelService->exportToResponse($todos, "todolist-{$safeName}-".now()->format('Ymd-His').'.xlsx');
+        return $excelService->exportToResponse($posts, "artikel-{$safeName}-".now()->format('Ymd-His').'.xlsx');
     }
 }
-

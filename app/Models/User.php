@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Features\Todo\Models\Todo;
+use App\Features\Post\Models\Post;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -61,22 +61,12 @@ class User extends Authenticatable
     }
 
     /**
-     * Get all todos belonging to the user.
+     * Get all posts written by the user.
      *
-     * @return HasMany<Todo, $this>
+     * @return HasMany<Post, $this>
      */
-    public function todos(): HasMany
+    public function posts(): HasMany
     {
-        return $this->hasMany(Todo::class);
-    }
-
-    /**
-     * Get all todo groups belonging to the user.
-     *
-     * @return HasMany<\App\Features\Todo\Models\TodoGroup, $this>
-     */
-    public function todoGroups(): HasMany
-    {
-        return $this->hasMany(\App\Features\Todo\Models\TodoGroup::class);
+        return $this->hasMany(Post::class);
     }
 }

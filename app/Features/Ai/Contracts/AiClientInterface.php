@@ -2,15 +2,10 @@
 
 namespace App\Features\Ai\Contracts;
 
-use App\Features\Ai\DTO\GeneratedTodoItem;
+use App\Features\Ai\DTO\GeneratedPostItem;
 
 interface AiClientInterface
 {
-    /**
-     * Generate multiple structured todo items based on a prompt.
-     *
-     * @return array<int, GeneratedTodoItem>
-     */
-    public function generateTodos(string $prompt, int $count = 3): array;
+    /** @return array<int, GeneratedPostItem> */
+    public function generatePosts(string $prompt, int $count = 3): array;
 }
-

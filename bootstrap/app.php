@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Middleware\EnsureRole;
-use App\Http\Middleware\EnsureTodoOwnership;
+use App\Http\Middleware\EnsurePostOwnership;      
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -21,7 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->alias([
             'role' => EnsureRole::class,
-            'owns.todo' => EnsureTodoOwnership::class,
+            'owns.post' => EnsurePostOwnership::class,        
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
