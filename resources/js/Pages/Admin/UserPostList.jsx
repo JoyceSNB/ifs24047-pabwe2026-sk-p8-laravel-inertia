@@ -32,7 +32,7 @@ export default function UserPostList({ targetUser, posts, filters = {} }) {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
                         <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Artikel {targetUser.name}</h1>
-                        <p className="text-sm text-slate-500 mt-0.5">
+                        <p className="text-sm text-slate-600 mt-0.5">
                             @{targetUser.username} &middot; {targetUser.email} &middot; mode baca saja (read-only)
                         </p>
                     </div>
@@ -47,7 +47,7 @@ export default function UserPostList({ targetUser, posts, filters = {} }) {
                 <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col sm:flex-row gap-3">
                     <input
                         type="text"
-                        placeholder="Cari judul atau isi artikel..."
+                        aria-label="Cari artikel" placeholder="Cari judul atau isi artikel..."
                         value={search}
                         onChange={(e) => {
                             setSearch(e.target.value);
@@ -56,7 +56,7 @@ export default function UserPostList({ targetUser, posts, filters = {} }) {
                         className="flex-1 px-4 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                     />
                     <select
-                        value={status}
+                        aria-label="Filter status" value={status}
                         onChange={(e) => {
                             setStatus(e.target.value);
                             applyFilters(search, e.target.value);
@@ -70,7 +70,7 @@ export default function UserPostList({ targetUser, posts, filters = {} }) {
                 </div>
 
                 {items.length === 0 ? (
-                    <div className="bg-white rounded-2xl border border-slate-200/80 p-12 text-center text-sm text-slate-500">
+                    <div className="bg-white rounded-2xl border border-slate-200/80 p-12 text-center text-sm text-slate-600">
                         Pengguna ini belum memiliki artikel.
                     </div>
                 ) : (
@@ -78,15 +78,15 @@ export default function UserPostList({ targetUser, posts, filters = {} }) {
                         {items.map((post) => (
                             <div key={post.id} className="p-4 flex flex-wrap items-center gap-2">
                                 <span className="font-semibold text-sm text-slate-900 truncate max-w-md">{post.title}</span>
-                                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${categoryClass(post.category)}`}>
+                                <span className={`text-xs font-bold px-2 py-0.5 rounded-full border ${categoryClass(post.category)}`}>
                                     {post.category}
                                 </span>
-                                <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                                <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
                                     post.is_published ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
                                 }`}>
                                     {post.is_published ? 'Dipublikasikan' : 'Draf'}
                                 </span>
-                                <span className="text-[11px] text-slate-500">{formatDate(post.published_at || post.created_at)}</span>
+                                <span className="text-[11px] text-slate-600">{formatDate(post.published_at || post.created_at)}</span>
                                 {post.is_published && (
                                     <Link href={`/articles/${post.slug}`} className="ml-auto text-xs font-semibold text-purple-600 hover:text-purple-800">
                                         Lihat di publik &rarr;

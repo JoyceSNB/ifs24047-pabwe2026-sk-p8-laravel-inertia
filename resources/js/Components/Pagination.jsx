@@ -21,7 +21,7 @@ export default function Pagination({ links = [], accent = 'indigo' }) {
                             ? activeClass
                             : link.url
                             ? 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'
-                            : 'bg-slate-50 text-slate-300 border-slate-200 cursor-not-allowed'
+                            : 'bg-slate-50 text-slate-600 border-slate-200 cursor-not-allowed'
                     }`}
                 />
             ))}

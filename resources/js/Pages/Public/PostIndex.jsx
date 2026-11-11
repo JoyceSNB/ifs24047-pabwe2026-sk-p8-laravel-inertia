@@ -9,26 +9,26 @@ function PostCard({ post }) {
 
     return (
         <article className="group bg-white rounded-2xl border border-slate-200/90 shadow-xs overflow-hidden flex flex-col hover:shadow-md hover:-translate-y-0.5 transition">
-            <Link href={`/articles/${post.slug}`} className="block h-44 bg-gradient-to-br from-indigo-100 via-violet-100 to-fuchsia-100 overflow-hidden">
+            <Link href={`/articles/${post.slug}`} tabIndex={-1} aria-hidden="true" className="block h-44 bg-gradient-to-br from-indigo-100 via-violet-100 to-fuchsia-100 overflow-hidden">
                 {cover ? (
-                    <img src={cover} alt={post.title} className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
+                    <img src={cover} alt="" loading="lazy" decoding="async" width="400" height="176" className="w-full h-full object-cover group-hover:scale-105 transition duration-300" />
                 ) : (
-                    <div className="w-full h-full flex items-center justify-center text-5xl font-black text-white/80 select-none">
+                    <div className="w-full h-full flex items-center justify-center text-5xl font-black text-indigo-700 select-none">
                         {post.title?.charAt(0).toUpperCase()}
                     </div>
                 )}
             </Link>
             <div className="p-5 flex-1 flex flex-col">
-                <span className={`self-start text-[10px] font-bold px-2 py-0.5 rounded-full border ${categoryClass(post.category)}`}>
+                <span className={`self-start text-xs font-bold px-2 py-0.5 rounded-full border ${categoryClass(post.category)}`}>
                     {post.category}
                 </span>
-                <h3 className="mt-3 text-lg font-bold text-slate-900 leading-snug line-clamp-2">
+                <h2 className="mt-3 text-lg font-bold text-slate-900 leading-snug line-clamp-2">
                     <Link href={`/articles/${post.slug}`} className="hover:text-indigo-600 transition">
                         {post.title}
                     </Link>
-                </h3>
+                </h2>
                 {post.excerpt && <p className="mt-2 text-sm text-slate-600 line-clamp-3">{post.excerpt}</p>}
-                <div className="mt-auto pt-4 flex items-center justify-between text-xs text-slate-500">
+                <div className="mt-auto pt-4 flex items-center justify-between text-xs text-slate-600">
                     <span className="font-semibold text-slate-700">{post.user?.name}</span>
                     <span>{formatDate(post.published_at)}</span>
                 </div>
@@ -54,7 +54,9 @@ export default function PostIndex({ posts, categories = [], filters = {}, isHome
 
     return (
         <PublicLayout>
-            <Head title={isHome ? 'Beranda' : 'Artikel'} />
+            <Head title={isHome ? 'Beranda' : 'Artikel'}>
+                <meta head-key="description" name="description" content="Baca artikel terbaru dari para penulis BlogVerse Pro, platform publikasi artikel gratis." />
+            </Head>
 
             {/* Hero (khusus Beranda) */}
             {isHome && (
@@ -66,7 +68,7 @@ export default function PostIndex({ posts, categories = [], filters = {}, isHome
                         <h1 className="mt-5 text-4xl sm:text-5xl font-black tracking-tight leading-tight">
                             Tulis, Terbitkan, dan Temukan<br className="hidden sm:block" /> Cerita yang Layak Dibaca
                         </h1>
-                        <p className="mt-5 max-w-2xl mx-auto text-indigo-100 text-base sm:text-lg">
+                        <p className="mt-5 max-w-2xl mx-auto text-white text-base sm:text-lg">
                             BlogVerse Pro mempertemukan para penulis dan pembaca. Baca artikel pilihan secara gratis, atau bergabung untuk mulai menulis.
                         </p>
                         {!user && (
@@ -81,7 +83,7 @@ export default function PostIndex({ posts, categories = [], filters = {}, isHome
                                 <Link
                                     href="/register"
                                     id="hero-register"
-                                    className="w-full sm:w-auto px-7 py-3 bg-indigo-500/40 border border-white/40 text-white font-bold rounded-xl hover:bg-indigo-500/60 transition"
+                                    className="w-full sm:w-auto px-7 py-3 bg-indigo-800 border border-white/60 text-white font-bold rounded-xl hover:bg-indigo-900 transition"
                                 >
                                     Daftar Penulis
                                 </Link>
@@ -105,7 +107,7 @@ export default function PostIndex({ posts, categories = [], filters = {}, isHome
                 {!isHome && (
                     <div className="mb-6">
                         <h1 className="text-3xl font-black text-slate-900 tracking-tight">Semua Artikel</h1>
-                        <p className="text-slate-500 mt-1">Telusuri tulisan terbaru dari para penulis BlogVerse Pro.</p>
+                        <p className="text-slate-600 mt-1">Telusuri tulisan terbaru dari para penulis BlogVerse Pro.</p>
                     </div>
                 )}
                 {isHome && (
@@ -117,8 +119,10 @@ export default function PostIndex({ posts, categories = [], filters = {}, isHome
                 {/* Pencarian & filter kategori */}
                 <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs space-y-3">
                     <div className="relative">
+                        <label htmlFor="search-articles" className="sr-only">Cari artikel</label>
                         <input
-                            type="text"
+                            id="search-articles"
+                            type="search"
                             placeholder="Cari judul atau isi artikel..."
                             value={search}
                             onChange={(e) => {
@@ -127,12 +131,13 @@ export default function PostIndex({ posts, categories = [], filters = {}, isHome
                             }}
                             className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                         />
-                        <svg className="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg aria-hidden="true" className="w-4 h-4 text-slate-600 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
                     <div className="flex flex-wrap gap-1.5">
                         <button
+                            aria-pressed={!category}
                             onClick={() => { setCategory(''); applyFilters(search, ''); }}
                             className={`px-3 py-1.5 rounded-full text-xs font-semibold transition ${
                                 !category ? 'bg-indigo-600 text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
@@ -157,8 +162,8 @@ export default function PostIndex({ posts, categories = [], filters = {}, isHome
                 {/* Galeri */}
                 {items.length === 0 ? (
                     <div className="mt-8 bg-white rounded-2xl border border-slate-200/80 p-12 text-center">
-                        <h3 className="text-base font-bold text-slate-800">Belum ada artikel yang cocok</h3>
-                        <p className="text-sm text-slate-500 mt-1">Coba kata kunci atau kategori yang lain.</p>
+                        <h2 className="text-base font-bold text-slate-800">Belum ada artikel yang cocok</h2>
+                        <p className="text-sm text-slate-600 mt-1">Coba kata kunci atau kategori yang lain.</p>
                     </div>
                 ) : (
                     <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

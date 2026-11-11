@@ -14,16 +14,16 @@ export default function Login() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <main className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <Head title="Masuk" />
 
             <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
                 <Link href="/" className="inline-flex w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 items-center justify-center text-white font-black text-2xl shadow-md">
                     B
                 </Link>
-                <h2 className="mt-4 text-3xl font-extrabold text-slate-900 tracking-tight">
+                <h1 className="mt-4 text-3xl font-extrabold text-slate-900 tracking-tight">
                     BlogVerse Pro
-                </h2>
+                </h1>
                 <p className="mt-2 text-sm text-slate-600">
                     Masuk untuk menulis dan mengelola artikel Anda
                 </p>
@@ -131,12 +131,12 @@ export default function Login() {
                     </div>
 
                     <div className="mt-3 text-center text-sm">
-                        <Link href="/" className="text-slate-500 hover:text-slate-800 hover:underline">
+                        <Link href="/" className="text-slate-600 hover:text-slate-800 hover:underline">
                             &larr; Kembali ke beranda
                         </Link>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     );
 }

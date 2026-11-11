@@ -16,16 +16,16 @@ export default function Register() {
     };
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <main className="min-h-screen bg-gradient-to-br from-slate-100 to-slate-200 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
             <Head title="Daftar Akun" />
 
             <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
                 <Link href="/" className="inline-flex w-12 h-12 rounded-2xl bg-gradient-to-br from-indigo-600 to-violet-600 items-center justify-center text-white font-black text-2xl shadow-md">
                     B
                 </Link>
-                <h2 className="mt-4 text-3xl font-extrabold text-slate-900 tracking-tight">
+                <h1 className="mt-4 text-3xl font-extrabold text-slate-900 tracking-tight">
                     Daftar Akun Baru
-                </h2>
+                </h1>
                 <p className="mt-2 text-sm text-slate-600">
                     Bergabung sebagai penulis dan mulai menerbitkan artikel Anda
                 </p>
@@ -35,10 +35,10 @@ export default function Register() {
                 <div className="bg-white py-8 px-6 shadow-xl shadow-slate-200/50 sm:rounded-2xl sm:px-10 border border-slate-100">
                     <form onSubmit={submit} className="space-y-4">
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700">
+                            <label htmlFor="reg-1" className="block text-sm font-semibold text-slate-700">
                                 Nama Lengkap
                             </label>
-                            <input
+                            <input id="reg-1"
                                 type="text"
                                 value={data.name}
                                 onChange={(e) => setData('name', e.target.value)}
@@ -50,10 +50,10 @@ export default function Register() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700">
+                            <label htmlFor="reg-2" className="block text-sm font-semibold text-slate-700">
                                 Username
                             </label>
-                            <input
+                            <input id="reg-2"
                                 type="text"
                                 value={data.username}
                                 onChange={(e) => setData('username', e.target.value)}
@@ -65,10 +65,10 @@ export default function Register() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700">
+                            <label htmlFor="reg-3" className="block text-sm font-semibold text-slate-700">
                                 Alamat Email
                             </label>
-                            <input
+                            <input id="reg-3"
                                 type="email"
                                 value={data.email}
                                 onChange={(e) => setData('email', e.target.value)}
@@ -80,10 +80,10 @@ export default function Register() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700">
+                            <label htmlFor="reg-4" className="block text-sm font-semibold text-slate-700">
                                 Password
                             </label>
-                            <input
+                            <input id="reg-4"
                                 type="password"
                                 value={data.password}
                                 onChange={(e) => setData('password', e.target.value)}
@@ -95,10 +95,10 @@ export default function Register() {
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-slate-700">
+                            <label htmlFor="reg-5" className="block text-sm font-semibold text-slate-700">
                                 Konfirmasi Password
                             </label>
-                            <input
+                            <input id="reg-5"
                                 type="password"
                                 value={data.password_confirmation}
                                 onChange={(e) => setData('password_confirmation', e.target.value)}
@@ -130,12 +130,12 @@ export default function Register() {
                     </div>
 
                     <div className="mt-3 text-center text-sm">
-                        <Link href="/" className="text-slate-500 hover:text-slate-800 hover:underline">
+                        <Link href="/" className="text-slate-600 hover:text-slate-800 hover:underline">
                             &larr; Kembali ke beranda
                 </Link>
                     </div>
                 </div>
             </div>
-        </div>
+        </main>
     );
 }

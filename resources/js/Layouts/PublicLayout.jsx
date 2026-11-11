@@ -31,7 +31,7 @@ export default function PublicLayout({ children }) {
                         </span>
                     </Link>
 
-                    <nav className="hidden md:flex items-center space-x-1">
+                    <nav aria-label="Navigasi utama" className="hidden md:flex items-center space-x-1">
                         <Link href="/" className="px-3 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition">
                             Beranda
                         </Link>
@@ -88,7 +88,7 @@ export default function PublicLayout({ children }) {
                     <button
                         onClick={() => setMenuOpen(!menuOpen)}
                         className="md:hidden p-2 text-slate-600 rounded-lg"
-                        aria-label="Toggle Navigation"
+                        aria-label="Buka menu navigasi" aria-expanded={menuOpen}
                     >
                         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             {menuOpen ? (
@@ -129,26 +129,26 @@ export default function PublicLayout({ children }) {
                             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500 flex items-center justify-center text-white font-black">B</div>
                             <span className="font-extrabold text-white text-lg">BlogVerse Pro</span>
                         </div>
-                        <p className="text-sm text-slate-400 mt-3 leading-relaxed">
+                        <p className="text-sm text-slate-300 mt-3 leading-relaxed">
                             Platform publikasi artikel multi-tier: baca bebas, menulis sebagai anggota, dan dipantau oleh admin.
                         </p>
                     </div>
                     <div>
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Jelajahi</h4>
+                        <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">Jelajahi</h2>
                         <ul className="space-y-2 text-sm">
                             <li><Link href="/" className="hover:text-white transition">Beranda Publik</Link></li>
                             <li><Link href="/articles" className="hover:text-white transition">Semua Artikel</Link></li>
                         </ul>
                     </div>
                     <div>
-                        <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Bergabung</h4>
+                        <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 mb-3">Bergabung</h2>
                         <ul className="space-y-2 text-sm">
                             <li><Link href="/login" id="footer-login" className="hover:text-white transition">Halaman Login</Link></li>
                             <li><Link href="/register" id="footer-register" className="hover:text-white transition">Halaman Register</Link></li>
                         </ul>
                     </div>
                 </div>
-                <div className="border-t border-slate-800 py-4 text-center text-xs text-slate-500">
+                <div className="border-t border-slate-800 py-4 text-center text-xs text-slate-300">
                     &copy; {new Date().getFullYear()} BlogVerse Pro &middot; PABWE IT Del
                 </div>
             </footer>

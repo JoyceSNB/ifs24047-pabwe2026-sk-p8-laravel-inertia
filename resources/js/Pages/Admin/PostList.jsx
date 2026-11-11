@@ -26,7 +26,7 @@ export default function PostList({ posts, filters = {}, categories = [] }) {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                     <div>
                         <h1 className="text-2xl font-bold text-slate-900 tracking-tight">Semua Artikel Sistem</h1>
-                        <p className="text-sm text-slate-500 mt-0.5">Pantau seluruh artikel dari semua penulis (read-only).</p>
+                        <p className="text-sm text-slate-600 mt-0.5">Pantau seluruh artikel dari semua penulis (read-only).</p>
                     </div>
                     <a
                         href="/admin/posts/export"
@@ -39,7 +39,7 @@ export default function PostList({ posts, filters = {}, categories = [] }) {
                 <div className="bg-white p-4 rounded-2xl border border-slate-200/80 shadow-xs flex flex-col lg:flex-row gap-3">
                     <input
                         type="text"
-                        placeholder="Cari judul atau isi artikel..."
+                        aria-label="Cari artikel" placeholder="Cari judul atau isi artikel..."
                         value={search}
                         onChange={(e) => {
                             setSearch(e.target.value);
@@ -48,7 +48,7 @@ export default function PostList({ posts, filters = {}, categories = [] }) {
                         className="flex-1 px-4 py-2 rounded-xl border border-slate-300 text-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
                     />
                     <select
-                        value={status}
+                        aria-label="Filter status" value={status}
                         onChange={(e) => {
                             setStatus(e.target.value);
                             applyFilters(search, e.target.value, category);
@@ -60,7 +60,7 @@ export default function PostList({ posts, filters = {}, categories = [] }) {
                         <option value="draft">Draf</option>
                     </select>
                     <select
-                        value={category}
+                        aria-label="Filter kategori" value={category}
                         onChange={(e) => {
                             setCategory(e.target.value);
                             applyFilters(search, status, e.target.value);
@@ -77,7 +77,7 @@ export default function PostList({ posts, filters = {}, categories = [] }) {
                 <div className="bg-white rounded-2xl border border-slate-200/90 shadow-xs overflow-hidden">
                     <div className="overflow-x-auto">
                         <table className="w-full text-left text-xs">
-                            <thead className="bg-slate-50 border-b border-slate-100 text-slate-500 uppercase tracking-wider font-semibold">
+                            <thead className="bg-slate-50 border-b border-slate-100 text-slate-600 uppercase tracking-wider font-semibold">
                                 <tr>
                                     <th className="px-6 py-3.5">Judul</th>
                                     <th className="px-6 py-3.5">Penulis</th>
@@ -89,7 +89,7 @@ export default function PostList({ posts, filters = {}, categories = [] }) {
                             <tbody className="divide-y divide-slate-100">
                                 {items.length === 0 && (
                                     <tr>
-                                        <td colSpan={5} className="px-6 py-10 text-center text-slate-500">Belum ada artikel.</td>
+                                        <td colSpan={5} className="px-6 py-10 text-center text-slate-600">Belum ada artikel.</td>
                                     </tr>
                                 )}
                                 {items.map((post) => (
@@ -103,21 +103,21 @@ export default function PostList({ posts, filters = {}, categories = [] }) {
                                         </td>
                                         <td className="px-6 py-4 text-slate-600">
                                             {post.user?.name}
-                                            <span className="text-slate-400"> @{post.user?.username}</span>
+                                            <span className="text-slate-600"> @{post.user?.username}</span>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${categoryClass(post.category)}`}>
+                                            <span className={`text-xs font-bold px-2 py-0.5 rounded-full border ${categoryClass(post.category)}`}>
                                                 {post.category}
                                             </span>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                                            <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
                                                 post.is_published ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'
                                             }`}>
                                                 {post.is_published ? 'Dipublikasikan' : 'Draf'}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 text-slate-400">{formatDate(post.published_at || post.created_at)}</td>
+                                        <td className="px-6 py-4 text-slate-600">{formatDate(post.published_at || post.created_at)}</td>
                                     </tr>
                                 ))}
                             </tbody>
