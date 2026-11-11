@@ -2,7 +2,7 @@
 
 namespace Tests\Unit\Models;
 
-use App\Features\Todo\Models\Todo;
+use App\Features\Post\Models\Post;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -23,13 +23,13 @@ class UserModelTest extends TestCase
         $this->assertFalse($member->isAdmin());
     }
 
-    public function test_user_todos_relationship(): void
+    public function test_user_posts_relationship(): void
     {
         $user = User::factory()->create();
-        Todo::factory()->count(3)->create(['user_id' => $user->id]);
+        Post::factory()->count(3)->create(['user_id' => $user->id]);
 
-        $this->assertCount(3, $user->todos);
-        $this->assertInstanceOf(Todo::class, $user->todos->first());
+        $this->assertCount(3, $user->posts);
+        $this->assertInstanceOf(Post::class, $user->posts->first());
     }
 
     public function test_user_casts(): void

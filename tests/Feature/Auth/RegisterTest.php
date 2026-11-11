@@ -65,7 +65,7 @@ class RegisterTest extends TestCase
         ]);
 
         $response->assertSessionHasNoErrors()
-            ->assertRedirect(route('todos.index'));
+            ->assertRedirect(route('dashboard.posts.index'));
 
         $this->assertAuthenticated();
         $this->assertDatabaseHas('users', [

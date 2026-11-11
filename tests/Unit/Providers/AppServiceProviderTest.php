@@ -3,9 +3,9 @@
 namespace Tests\Unit\Providers;
 
 use App\Features\Ai\Contracts\AiClientInterface;
-use App\Features\Ai\Services\OpenAiTodoGeneratorService;
-use App\Features\Todo\Contracts\TodoRepositoryInterface;
-use App\Features\Todo\Repositories\TodoRepository;
+use App\Features\Ai\Services\OpenAiPostGeneratorService;
+use App\Features\Post\Contracts\PostRepositoryInterface;
+use App\Features\Post\Repositories\PostRepository;
 use App\Providers\AppServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -16,11 +16,8 @@ class AppServiceProviderTest extends TestCase
 {
     public function test_service_bindings(): void
     {
-        $repo = app(TodoRepositoryInterface::class);
-        $this->assertInstanceOf(TodoRepository::class, $repo);
-
-        $ai = app(AiClientInterface::class);
-        $this->assertInstanceOf(OpenAiTodoGeneratorService::class, $ai);
+        $this->assertInstanceOf(PostRepository::class, app(PostRepositoryInterface::class));
+        $this->assertInstanceOf(OpenAiPostGeneratorService::class, app(AiClientInterface::class));
     }
 
     public function test_force_https_configuration(): void
@@ -55,4 +52,3 @@ class AppServiceProviderTest extends TestCase
         $this->assertEquals(1000, $limiterApi($request)->maxAttempts);
     }
 }
-

@@ -73,7 +73,7 @@ class LoginTest extends TestCase
         ]);
 
         $response->assertSessionHasNoErrors()
-            ->assertRedirect(route('todos.index'));
+            ->assertRedirect(route('dashboard.posts.index'));
 
         $this->assertAuthenticated();
     }
@@ -92,7 +92,7 @@ class LoginTest extends TestCase
         ]);
 
         $response->assertSessionHasNoErrors()
-            ->assertRedirect(route('todos.index'));
+            ->assertRedirect(route('dashboard.posts.index'));
 
         $this->assertAuthenticated();
     }
@@ -122,7 +122,7 @@ class LoginTest extends TestCase
 
         $this->actingAs($user)
             ->post('/logout')
-            ->assertRedirect(route('login'));
+            ->assertRedirect('/');
 
         $this->assertGuest();
     }
