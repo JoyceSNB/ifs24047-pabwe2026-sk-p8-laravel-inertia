@@ -61,34 +61,6 @@ resources/js/
 └── Pages/
 ```
 
----
-
-## Konfigurasi Environment (`.env`)
-
-```ini
-APP_NAME="PABWE P8"
-APP_ENV=local
-APP_DEBUG=true
-APP_URL=http://localhost:8000
-
-FORCE_HTTPS=false
-
-# Basis Data PostgreSQL
-DB_CONNECTION=pgsql
-DB_HOST=127.0.0.1
-DB_PORT=5432
-DB_DATABASE=pabwe_p8_blog
-DB_USERNAME=postgres
-DB_PASSWORD=postgres
-
-# Konfigurasi AI (OpenAI API)
-OPENAI_ENDPOINT=https://api.openai.com/v1
-OPENAI_KEY=isi-dengan-api-key
-OPENAI_MODEL=gpt-4o-mini
-```
-
----
-
 ## Instalasi & Menjalankan Proyek
 
 1. Masuk ke direktori proyek (folder tempat repositori ini berada).
