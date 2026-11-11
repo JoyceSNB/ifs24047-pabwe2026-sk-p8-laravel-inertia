@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <meta name="description" inertia="description" content="BlogVerse Pro: platform publikasi artikel. Baca artikel pilihan secara gratis atau bergabung sebagai penulis.">
+    <meta name="description" content="BlogVerse Pro: platform publikasi artikel. Baca artikel pilihan secara gratis atau bergabung sebagai penulis.">
     <title inertia>{{ config('app.name', 'BlogVerse Pro') }}</title>
 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
